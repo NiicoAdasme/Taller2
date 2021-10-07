@@ -41,10 +41,11 @@ const MiComponente = () => {
 
         getPersonas()
     }, [])
+
     async function getPersonas() {
         try {
-            const response = await axios.get('http://192.99.144.232:5000/api/personas?grupo=2');
-            if (response.status == 200) {
+            const response = await axios.get('http://192.99.144.232:5000/api/personas?grupo=11');
+            if (response.status === 200) {
 
                 setPersonas(response.data.persona)
                 console.log(response.data);
@@ -61,11 +62,11 @@ const MiComponente = () => {
         axios.post('http://192.99.144.232:5000/api/personas', {
             nombre: nombre,
             apellido: apellido,
-            grupo: 2
+            grupo: 11
         })
             .then(function (response) {
 
-                if (response.status == 200) {
+                if (response.status === 200) {
                     alert("Registro correcto")
                     getPersonas()
 
@@ -88,7 +89,7 @@ const MiComponente = () => {
         })
         .then(function (response) {
 
-            if (response.status == 200) {
+            if (response.status === 200) {
                 alert("Actualización correcta")
                 getPersonas()
 
@@ -129,10 +130,10 @@ const MiComponente = () => {
         }
     ];
 
-    const data = [
-        { name: "Name 1", title: "Title 1", location: "Location 1", age: 30, salary: 10 },
-        { name: "Name 2", title: "Title 2", location: "Location 2", age: 31, salary: 11 },
-    ];
+    // const data = [
+    //     { name: "Name 1", title: "Title 1", location: "Location 1", age: 30, salary: 10 },
+    //     { name: "Name 2", title: "Title 2", location: "Location 2", age: 31, salary: 11 },
+    // ];
 
     const handleRowClick = (rowData, rowMeta) => {
         // console.log(rowData.name)
@@ -142,11 +143,18 @@ const MiComponente = () => {
         setId(rowData._id)
 
     };
+
     const options = {
         filterType: 'checkbox',
         onlyOneRowCanBeSelected: true,
         onRowClick: handleRowClick
     };
+
+    const handleInputCLean = () => {
+        setNombre('');
+        setApellido('');
+        setId(0);
+    }
 
     return (
         <Fragment>
@@ -160,10 +168,15 @@ const MiComponente = () => {
                     <input type="text" placeholder="Apellido" name="apellido" onChange={handleInputChangeApellido} value={apellido}></input>
                 </div>
                 
-                <button onClick={enviarDatos}>Enviar</button>
+                {
+                    id ? <button onClick={()=>{actualizarDatos(id)}}>Modificar</button>
+                    : <button onClick={enviarDatos}>Enviar</button>
+                }
+
                 <br/>
 
-                <button onClick={()=>{actualizarDatos(id)}}>Modificar</button>
+                <button onClick={handleInputCLean}>Limpiar</button>
+                
 
 
                 {/* <div className="users">
