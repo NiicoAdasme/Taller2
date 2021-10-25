@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-// import App from './App';
-import MiComponente from './vistas/formulario/MiComponente';
+// import MiComponente from './vistas/formulario/MiComponente';
 import reportWebVitals from './reportWebVitals';
+import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <MiComponente />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

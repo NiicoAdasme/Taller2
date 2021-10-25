@@ -80,7 +80,7 @@ const MiComponente = () => {
             });
     }
 
-    const actualizarDatos = (id) => {
+    const actualizarDatos = (id)  => {
         console.log(id);
         axios.put(`http://192.99.144.232:5000/api/personas/${id}`, {
             nombre: nombre,
